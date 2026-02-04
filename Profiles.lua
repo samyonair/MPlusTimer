@@ -158,6 +158,18 @@ function MPT:ModernizeProfile(profile, generic)
 
         self.Version = self:GetVersion()
     end
+    if profile then
+        if profile.Background and profile.Background.UseChatBackground == nil then
+            profile.Background.UseChatBackground = false
+        end
+        if not profile.BestTimes then
+            profile.BestTimes = {
+                Theme = "Default",
+                UseChatBackground = false,
+                BackgroundColor = {0, 0, 0, 0.7},
+            }
+        end
+    end
 end
 
 function MPT:GetSV(key)
@@ -214,5 +226,24 @@ function MPT:CreateProfile(name)
     self:LoadProfile(name)
     if name ~= "default" and not MPTSV.MainProfile then
         MPTSV.MainProfile = name -- if no main profile is set, we set the first created profile as main profile
+    end
+end
+
+function MPT:CreateMeralthisUIProfile()
+    local name = "MeralthisUI"
+    if MPTSV.Profiles and MPTSV.Profiles[name] then
+        self:LoadProfile(name)
+        return
+    end
+    local data = CopyTable(self.DefaultProfile)
+    data.Version = self:GetVersion()
+    data.name = name
+    data.Background.UseChatBackground = true
+    data.BestTimes.Theme = "MeralthisUI"
+    data.BestTimes.UseChatBackground = true
+    MPTSV.Profiles[name] = data
+    self:LoadProfile(name)
+    if not MPTSV.MainProfile then
+        MPTSV.MainProfile = name
     end
 end

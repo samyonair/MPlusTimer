@@ -136,6 +136,7 @@ MPT.DefaultProfile = {
     FrameStrata = "HIGH",
     Background = {
         enabled = true,
+        UseChatBackground = false,
         Color = {0, 0, 0, 0.5},
         WidthOffset = 0,
         HeightOffset = 0,
@@ -143,6 +144,11 @@ MPT.DefaultProfile = {
         yOffset = 0,
         BorderColor = {0, 0, 0, 1},
         BorderSize = 1,
+    },
+    BestTimes = {
+        Theme = "Default",
+        UseChatBackground = false,
+        BackgroundColor = {0, 0, 0, 0.7},
     },
     Position = {
         xOffset = 0,
