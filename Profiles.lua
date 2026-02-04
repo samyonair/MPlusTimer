@@ -216,3 +216,26 @@ function MPT:CreateProfile(name)
         MPTSV.MainProfile = name -- if no main profile is set, we set the first created profile as main profile
     end
 end
+
+function MPT:CreateProfileFromTemplate(name, template)
+    if not template then return end
+    if not MPTSV.Profiles then MPTSV.Profiles = {} end
+    if not MPTSV.ProfileKey then MPTSV.ProfileKey = {} end
+
+    local baseName = name or template.name or L["default"]
+    local finalName = baseName
+    local suffix = 2
+    while MPTSV.Profiles[finalName] do
+        finalName = baseName .. " " .. suffix
+        suffix = suffix + 1
+    end
+
+    local data = CopyTable(template)
+    data.Version = self:GetVersion()
+    data.name = finalName
+    MPTSV.Profiles[finalName] = data
+    self:LoadProfile(finalName)
+    if finalName ~= "default" and not MPTSV.MainProfile then
+        MPTSV.MainProfile = finalName
+    end
+end

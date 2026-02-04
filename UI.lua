@@ -631,6 +631,13 @@ local NewProfile = {
     set = function(_, value) MPT:CreateProfile(value) end,
     get = function() return "" end,
 }
+local CreateElvUIProfile = {
+    type = "execute",
+    name = "Create ElvUI/Merathis Profile",
+    desc = "Create a new profile based on the ElvUI/Merathis preset.",
+    order = 5.5,
+    func = function() MPT:CreateProfileFromTemplate("ElvUI/Merathis", MPT.ElvUIProfile) end,
+}
 
 local ActiveProfile = {
     type = "select",
@@ -709,6 +716,7 @@ local profiles = {
             width = "full",
         },
         NewProfile = NewProfile,
+        CreateElvUIProfile = CreateElvUIProfile,
         ActiveProfile = ActiveProfile,
         CopyProfile = CopyProfile,
         ExportProfile = {

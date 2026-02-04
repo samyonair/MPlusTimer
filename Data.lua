@@ -495,6 +495,18 @@ MPT.DefaultProfile = {
     },
 }
 
+MPT.ElvUIProfile = CopyTable(MPT.DefaultProfile)
+MPT.ElvUIProfile.name = "ElvUI/Merathis"
+MPT.ElvUIProfile.Background.Color = {0.08, 0.08, 0.08, 0.85}
+MPT.ElvUIProfile.Background.BorderColor = {0.12, 0.12, 0.12, 1}
+MPT.ElvUIProfile.TimerBar.Texture = "ElvUI Norm"
+MPT.ElvUIProfile.TimerBar.BackgroundColor = {0.08, 0.08, 0.08, 0.85}
+MPT.ElvUIProfile.TimerBar.BorderColor = {0.12, 0.12, 0.12, 1}
+MPT.ElvUIProfile.ForcesBar.Texture = "ElvUI Norm"
+MPT.ElvUIProfile.ForcesBar.BackgroundColor = {0.08, 0.08, 0.08, 0.85}
+MPT.ElvUIProfile.ForcesBar.BorderColor = {0.12, 0.12, 0.12, 1}
+MPT.ElvUIProfile.CurrentPullBar.Texture = "ElvUI Norm"
+
 MPT.AnchorTypes = {
     ["MainFrame"] = true,
     ["KeyInfo"] = true,
