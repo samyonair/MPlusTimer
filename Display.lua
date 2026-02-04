@@ -134,7 +134,7 @@ function MPT:UpdateMainFrame(BackgroundOnly)
             local w, h = F:GetWidth(), F:GetHeight()
             F.BG:SetSize(w+(self.Background.WidthOffset), h+(self.Background.HeightOffset))
             self:SetPoint(F.BG, "TOPLEFT", F, "TOPLEFT", self.Background.xOffset, self.Background.yOffset)
-            F.BG:SetColorTexture(unpack(self.Background.Color))  
+            self:ApplyBackgroundTexture(F.BG, self.Background.Color, self.Background.UseChatBackground)
             F.BGBorder:SetFrameLevel(F.KeyInfo:GetFrameLevel()+1)
             F.BGBorder:SetAllPoints(F.BG)
             F.BGBorder:SetBackdrop({
@@ -156,7 +156,7 @@ function MPT:UpdateMainFrame(BackgroundOnly)
         self:SetPoint(F, self.Position.Anchor, UIParent, self.Position.relativeTo, self.Position.xOffset, self.Position.yOffset)
         if self.Background.enabled then
             F.BG:SetAllPoints(F)
-            F.BG:SetColorTexture(unpack(self.Background.Color))    
+            self:ApplyBackgroundTexture(F.BG, self.Background.Color, self.Background.UseChatBackground)
             F.BGBorder:SetFrameLevel(F.KeyInfo:GetFrameLevel()+1)        
             F.BGBorder:SetAllPoints(F)
             F.BGBorder:SetBackdrop({

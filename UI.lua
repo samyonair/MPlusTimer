@@ -278,13 +278,14 @@ local Background = {
     order = 3,
     args = {
         enabled = MPT:CreateToggle(1, "Enable", "Enable Background", {"Background", "enabled"}, true),
-        Color = MPT:CreateColor(2, "Color", "Color of the Background", {"Background", "Color"}, true),
-        BorderColor = MPT:CreateColor(3, "Border Color", "Color of the Border", {"Background", "BorderColor"}, true),
-        xOffset = MPT:CreateRange(4, "X Offset", "X Offset of the Background", -300, 300, 0.1, {"Background", "xOffset"}, true),
-        yOffset = MPT:CreateRange(5, "Y Offset", "Y Offset of the Background", -300, 300, 0.1, {"Background", "yOffset"}, true),
-        BorderSize = MPT:CreateRange(6, "Border Size", "Size of the Border", 1, 10, 1, {"Background", "BorderSize"}, true),
-        WidthOffset = MPT:CreateRange(7, "Width Offset", "Additional or less Width", -300, 300, 0.1, {"Background", "WidthOffset"}, true),
-        HeightOffset = MPT:CreateRange(8, "Height Offset", "Additional or less Height", -300, 300, 0.1, {"Background", "HeightOffset"}, true),
+        UseChatBackground = MPT:CreateToggle(2, "Use Chat Background", "Use the chat frame background texture", {"Background", "UseChatBackground"}, true),
+        Color = MPT:CreateColor(3, "Color", "Color of the Background", {"Background", "Color"}, true),
+        BorderColor = MPT:CreateColor(4, "Border Color", "Color of the Border", {"Background", "BorderColor"}, true),
+        xOffset = MPT:CreateRange(5, "X Offset", "X Offset of the Background", -300, 300, 0.1, {"Background", "xOffset"}, true),
+        yOffset = MPT:CreateRange(6, "Y Offset", "Y Offset of the Background", -300, 300, 0.1, {"Background", "yOffset"}, true),
+        BorderSize = MPT:CreateRange(7, "Border Size", "Size of the Border", 1, 10, 1, {"Background", "BorderSize"}, true),
+        WidthOffset = MPT:CreateRange(8, "Width Offset", "Additional or less Width", -300, 300, 0.1, {"Background", "WidthOffset"}, true),
+        HeightOffset = MPT:CreateRange(9, "Height Offset", "Additional or less Height", -300, 300, 0.1, {"Background", "HeightOffset"}, true),
     }
 }
 
@@ -603,6 +604,15 @@ local PBInfo = MPT:CreateTextSetting(L["PB Info"], "PBInfo", 6, true)
 PBInfo.args.Format = MPT:CreateDropDown(11, {[1] = "DD/MM/YY", [2] = "MM/DD/YY"}, "Date Format", "Format in which the date is displayed", {"PBInfo", "Format"}, true)
 PBInfo.args.AnchoredTo = MPT:CreateDropDown(12, {["MainFrame"] = L["Main Frame"], ["KeyInfo"] = L["Key Info Bar"], ["TimerBar"] = L["Timer Bar"], ["Bosses"] = L["Bosses"], ["ForcesBar"] = L["Forces Bar"]}, "Anchored To", "What the PB Info is anchored to", {"PBInfo", "AnchoredTo"}, true)
 
+local BestTimesUI = {
+    type = "group",
+    name = L["Best Times UI"],
+    order = 7,
+    args = {
+        Theme = MPT:CreateDropDown(1, {["Default"] = L["Default"], ["ElvUI"] = L["ElvUI"], ["MeralthisUI"] = L["MeralthisUI"]}, "Best Times Theme", "Best Times Theme Desc", {"BestTimes", "Theme"}, true),
+        UseChatBackground = MPT:CreateToggle(2, "Use Chat Background", "Use the chat frame background texture", {"BestTimes", "UseChatBackground"}, true),
+    },
+}
 
 
 
@@ -731,6 +741,13 @@ local profiles = {
             width = "full",
             multiline = 10,
         },
+        CreateMeralthisUIProfile = {
+            type = "execute",
+            order = 9.5,
+            name = L["Create MeralthisUI Profile"],
+            desc = L["Create and load a MeralthisUI themed profile"],
+            func = function() MPT:CreateMeralthisUIProfile() end,
+        },
         DeleteProfile = DeleteProfile,
     }
 }
@@ -746,6 +763,7 @@ local settings = {
         Bosses = Bosses,
         EnemyForces = EnemyForces,
         PBInfo = PBInfo,
+        BestTimesUI = BestTimesUI,
     },    
 }
 
