@@ -43,56 +43,14 @@ StaticPopupDialogs["MPT_DELETE_CHARACTER"] = {
     hideOnEscape = true,
 }
 
-function MPT:GetBestTimesThemeColors()
-    local theme = self.BestTimes and self.BestTimes.Theme or "Default"
-    if theme == "MeralthisUI" then
-        return {0.08, 0.08, 0.08, 0.85}, {0.22, 0.72, 1, 1}
-    elseif theme == "ElvUI" then
-        return {0.05, 0.05, 0.05, 0.8}, {0.2, 0.2, 0.2, 1}
-    end
-    return {0, 0, 0, 0.7}, {0.2, 0.6, 1, 1}
-end
-
-function MPT:ApplyBestTimesTheme()
-    local F = self.BestTimeFrame
-    if not F then return end
-    local bgColor, borderColor = self:GetBestTimesThemeColors()
-    local useChatBackground = self.BestTimes and self.BestTimes.UseChatBackground
-    if F.BG then
-        self:ApplyBackgroundTexture(F.BG, bgColor, useChatBackground)
-    end
-    if F.Border then
-        F.Border:SetBackdropBorderColor(unpack(borderColor))
-    end
-    if F.SeasonButtonFrame then
-        F.SeasonButtonFrame:SetBackdropBorderColor(unpack(borderColor))
-    end
-    if F.DungeonButtonFrame then
-        F.DungeonButtonFrame:SetBackdropBorderColor(unpack(borderColor))
-    end
-    if F.LevelButtonFrame then
-        F.LevelButtonFrame:SetBackdropBorderColor(unpack(borderColor))
-    end
-    if F.PBDataFrame then
-        if F.PBDataFrame.BG then
-            self:ApplyBackgroundTexture(F.PBDataFrame.BG, bgColor, useChatBackground)
-        end
-        F.PBDataFrame:SetBackdropBorderColor(unpack(borderColor))
-    end
-    if F.RunEditPanel then
-        F.RunEditPanel:SetBackdropBorderColor(unpack(borderColor))
-    end
-end
-
 function MPT:CreateEditPanel()
     local F = self.BestTimeFrame
     if not F then return end
     if not F.RunEditPanel then
-        local _, borderColor = self:GetBestTimesThemeColors()
         F.RunEditPanel = CreateFrame("Frame", nil, F, "BackdropTemplate")
         F.RunEditPanel:SetSize(300, 450)
         self:SetPoint(F.RunEditPanel, "BOTTOMLEFT", F.PBDataFrame, "BOTTOMLEFT", 0, 0)
-        self:AddBackDrop(F.RunEditPanel, 2, borderColor)
+        self:AddBackDrop(F.RunEditPanel, 2, {0.2, 0.6, 1, 1})
 
         -- Dungeon Name
         F.RunEditPanel.DungeonLabel = self:CreateLabel(F.RunEditPanel, "TOPLEFT", F.RunEditPanel, "TOPLEFT", 20, -20, L["Dungeon:"])
@@ -321,10 +279,8 @@ function MPT:CreatePBFrame()
             F:Hide()
         end)
 
-        local bgColor, borderColor = self:GetBestTimesThemeColors()
-        local useChatBackground = self.BestTimes and self.BestTimes.UseChatBackground
         -- Background
-        self:AddBGBackground(F, "BG", "Border", 2, bgColor, borderColor, useChatBackground)
+        self:AddBGBackground(F, "BG", "Border", 2, {0, 0, 0, 0.7}, {0.2, 0.6, 1, 1})
 
         -- Season Buttons
         local seasonheight = 40
@@ -333,7 +289,7 @@ function MPT:CreatePBFrame()
         self:SetPoint(F.SeasonButtonFrame, "TOPLEFT", F, "TOPLEFT", 0, 0)
 
         F.SeasonButtons = {}
-        self:AddBackDrop(F.SeasonButtonFrame, 1, borderColor)
+        self:AddBackDrop(F.SeasonButtonFrame, 1, {0.2, 0.6, 1, 1})
 
         -- Dungeon Buttons
         local dungeonwidth = 160
@@ -341,7 +297,7 @@ function MPT:CreatePBFrame()
         F.DungeonButtonFrame:SetSize(dungeonwidth, height-seasonheight)
         self:SetPoint(F.DungeonButtonFrame, "TOPLEFT", F.SeasonButtonFrame, "BOTTOMLEFT", 0, 0)
         F.DungeonButtons = {}
-        self:AddBackDrop(F.DungeonButtonFrame, 1, borderColor)
+        self:AddBackDrop(F.DungeonButtonFrame, 1, {0.2, 0.6, 1, 1})
 
 
         -- Level Buttons
@@ -350,7 +306,7 @@ function MPT:CreatePBFrame()
         F.LevelButtonFrame:SetSize(levelwidth, height-seasonheight)
         self:SetPoint(F.LevelButtonFrame, "TOPLEFT", F.DungeonButtonFrame, "TOPRIGHT", 0, 0)
         F.LevelButtons = {}
-        self:AddBackDrop(F.LevelButtonFrame, 1, borderColor)
+        self:AddBackDrop(F.LevelButtonFrame, 1, {0.2, 0.6, 1, 1})
 
         -- Level Scroll Frame
         F.LevelScrollFrame = CreateFrame("ScrollFrame", nil, F.LevelButtonFrame, "UIPanelScrollFrameTemplate")
@@ -366,8 +322,7 @@ function MPT:CreatePBFrame()
         F.PBDataFrame = CreateFrame("Frame", nil, F, "BackdropTemplate")
         F.PBDataFrame:SetSize(width-dungeonwidth-levelwidth, height-seasonheight)
         self:SetPoint(F.PBDataFrame, "TOPLEFT", F.LevelButtonFrame, "TOPRIGHT", 0, 0)
-        self:AddBackground(F.PBDataFrame, "BG", bgColor, useChatBackground)
-        self:AddBackDrop(F.PBDataFrame, 1, borderColor)
+        self:AddBackDrop(F.PBDataFrame, 1, {0.2, 0.6, 1, 1})
 
         -- Delete Button
         F.DeleteButton = CreateFrame("Button", nil, F.PBDataFrame)
@@ -482,7 +437,6 @@ function MPT:ShowPBFrame()
     else
         self:CreatePBFrame()
     end
-    self:ApplyBestTimesTheme()
     self.BestTimeFrame:Show()
     self:ShowSeasonFrames()
 end

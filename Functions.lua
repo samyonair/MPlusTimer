@@ -123,24 +123,15 @@ function MPT:CreateStatusBar(parent, name, Backdrop, border)
     end
 end
 
-function MPT:AddBGBackground(parent, bgname, bordername, edgeSize, bgColor, bordercolor, useChatBackground)
-    self:AddBackground(parent, bgname, bgColor, useChatBackground)
+function MPT:AddBGBackground(parent, bgname, bordername, edgeSize, bgColor, bordercolor)
+    self:AddBackground(parent, bgname, bgColor)
     self:AddBorder(parent, bordername, edgeSize, bordercolor)
 end
 
-function MPT:ApplyBackgroundTexture(texture, color, useChatBackground)
-    if useChatBackground then
-        texture:SetTexture("Interface\\ChatFrame\\ChatFrameBackground")
-        texture:SetVertexColor(unpack(color))
-    else
-        texture:SetColorTexture(unpack(color))
-    end
-end
-
-function MPT:AddBackground(parent, name, color, useChatBackground)
+function MPT:AddBackground(parent, name, color)
     parent[name] = parent:CreateTexture(nil, "BACKGROUND")
     parent[name]:SetAllPoints(parent)
-    self:ApplyBackgroundTexture(parent[name], color or {0, 0, 0, 0.7}, useChatBackground)
+    parent[name]:SetColorTexture(unpack(color or {0, 0, 0, 0.7}))
 end
 
 function MPT:AddBorder(parent, name, edgeSize, color)
@@ -301,9 +292,6 @@ function MPT:UpdateDisplay()
         self:Init(true)
     elseif C_ChallengeMode.IsChallengeModeActive() then
         self:Init(false)
-    end
-    if self.ApplyBestTimesTheme then
-        self:ApplyBestTimesTheme()
     end
 end
 

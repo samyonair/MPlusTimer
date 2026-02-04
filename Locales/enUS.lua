@@ -236,18 +236,8 @@ L["Change All Textures Desc"] = "Changes all bar textures at once"
 L["Main Frame Positioning"] = true
 L["Background"] = true
 L["Enable Background"] = true
-L["Use Chat Background"] = true
-L["Use the chat frame background texture"] = true
 L["Width Offset"] = true
 L["Height Offset"] = true
-L["Best Times UI"] = true
-L["Best Times Theme"] = true
-L["Best Times Theme Desc"] = "Color theme used for the Best Times window"
-L["Default"] = true
-L["ElvUI"] = true
-L["MeralthisUI"] = true
-L["Create MeralthisUI Profile"] = true
-L["Create and load a MeralthisUI themed profile"] = true
 
 -- Key Info & Text Settings
 L["Key Info Bar"] = true
